@@ -1,6 +1,6 @@
 package entities;
 
-public enum WinningStrategy {
+public enum Strategy {
     ROW,
     COLUMN,
     DIAGONAL,

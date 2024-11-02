@@ -3,18 +3,21 @@ package controller;
 import entities.Game;
 import entities.GameStatus;
 import entities.Player;
-import entities.WinningStrategy;
+import entities.Strategy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
 
 
-    public Game startGame(int boardSize, List<Player> playerList, List<WinningStrategy> winningStrategyList){
+    public Game startGame(int boardSize, List<Player> playerList, List<Strategy> strategyList){
         return Game.getBuilder()
                 .setBoard(boardSize)
                 .setPlayerList(playerList)
-                .setWinningStrategyList(winningStrategyList)
+                .setGameStatus(GameStatus.IN_PROGRESS)
+                .setMoveList(new ArrayList<>())
+                .setWinningStrategyList(strategyList)
                 .build();
     }
 
@@ -31,6 +34,10 @@ public class GameController {
     }
 
     public void makeMove(Game game){
+        game.makeMove();
+    }
 
+    public void undo(Game game){
+        game.undo();
     }
 }

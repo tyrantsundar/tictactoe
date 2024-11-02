@@ -8,4 +8,10 @@ public class CornerWinningStrategy implements WinningStrategy{
     public boolean checkWinner(Board board, Move move) {
         return false;
     }
+
+    @Override
+    public void undo(Board board, Move move) {
+
+    }
+
 }

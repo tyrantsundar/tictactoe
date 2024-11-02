@@ -9,6 +9,7 @@ public class Cell {
     public Cell(int row, int col) {
         this.row = row;
         this.col = col;
+        this.status = CellStatus.EMPTY;
     }
 
     public int getRow() {
@@ -35,9 +36,17 @@ public class Cell {
         this.symbol = symbol;
     }
 
+    public CellStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CellStatus status) {
+        this.status = status;
+    }
+
     public void display(){
         if(this.status == CellStatus.FILL) {
-            System.out.print("| " + this.symbol + " ");
+            System.out.print("| " + this.symbol.getSymbolChar() + " ");
         }else{
             System.out.print("| - |");
         }

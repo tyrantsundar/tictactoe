@@ -44,4 +44,16 @@ public abstract class Player {
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
     }
+
+    public boolean validateMove(int row, int col, Board board){
+        if(row < 0  || col < 0 || row >= board.getSize() || col >= board.getSize()){
+            return false;
+        }
+        if(board.getGrid().get(row).get(col).getStatus().equals(CellStatus.FILL)){
+            return false;
+        }
+        return true;
+    }
+
+    public abstract Move makeMove(Game game);
 }

@@ -8,12 +8,22 @@ import java.util.Map;
 
 public class RowWinningStrategy implements WinningStrategy{
     Map<Integer, Map<Character, Integer>> rowCharCountMap = new HashMap<>();
+    private static RowWinningStrategy instance;
+
+    private RowWinningStrategy(){}
+
+    public static RowWinningStrategy getInstance(){
+        if(instance == null){
+            instance = new RowWinningStrategy();
+        }
+        return instance;
+    }
 
     @Override
     public boolean checkWinner(Board board, Move move) {
 
         int row = move.getCell().getRow();
-        char symbolChar = move.getCell().getSymbol().getSymbolChar();
+        char symbolChar = move.getPlayer().getSymbol().getSymbolChar();
 
         if(!rowCharCountMap.containsKey(row)){
             rowCharCountMap.put(row,new HashMap<>());
@@ -34,4 +44,12 @@ public class RowWinningStrategy implements WinningStrategy{
         return false;
     }
 
+    @Override
+    public void undo(Board board, Move move){
+        int row = move.getCell().getRow();
+        char symbolChar = move.getPlayer().getSymbol().getSymbolChar();
+        Map<Character, Integer> charCountMap = rowCharCountMap.get(row);
+        charCountMap.put(symbolChar, charCountMap.get(symbolChar)-1);
+        rowCharCountMap.put(row,charCountMap);
+    }
 }
